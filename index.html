@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Florida Family Trip! 🌴</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sun: #FFD93D;
+    --ocean: #06B6D4;
+    --ocean-dark: #0891B2;
+    --coral: #FF6B6B;
+    --coral-dark: #E85555;
+    --palm: #22C55E;
+    --palm-dark: #16A34A;
+    --sand: #FFF8E7;
+    --sky: #E0F7FA;
+    --ink: #1E293B;
+    --white: #FFFFFF;
+    --purple: #A855F7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--sky);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── WAVY SECTION DIVIDERS ── */
+  .wave-top {
+    width: 100%; overflow: hidden; line-height: 0;
+    transform: rotate(180deg);
+  }
+  .wave-top svg { display: block; }
+  .wave-bottom { width: 100%; overflow: hidden; line-height: 0; }
+  .wave-bottom svg { display: block; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: linear-gradient(135deg, var(--ocean), var(--ocean-dark));
+    padding: 0.9rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+  }
+  .nav-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: white;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  }
+  .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 99px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.2); color: white; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #06B6D4 0%, #0EA5E9 40%, #38BDF8 70%, #7DD3FC 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated sun */
+  .sun {
+    position: absolute; top: 4rem; right: 8%;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, #FFE566, #FFD93D);
+    border-radius: 50%;
+    box-shadow: 0 0 60px rgba(255,217,61,0.6), 0 0 100px rgba(255,217,61,0.2);
+    animation: sunPulse 3s ease-in-out infinite;
+  }
+  .sun::before {
+    content: '';
+    position: absolute; inset: -20px;
+    background: radial-gradient(circle, rgba(255,217,61,0.3), transparent 70%);
+    border-radius: 50%;
+    animation: sunRays 3s ease-in-out infinite;
+  }
+  @keyframes sunPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(255,217,61,0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 0 80px rgba(255,217,61,0.8); }
+  }
+  @keyframes sunRays {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.1); }
+  }
+
+  /* Floating clouds */
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    border-radius: 99px;
+    animation: float 6s ease-in-out infinite;
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+  }
+  .cloud1 { width: 100px; height: 35px; top: 15%; left: 5%; animation-delay: 0s; }
+  .cloud1::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+  .cloud1::after { width: 35px; height: 35px; top: -15px; left: 45px; }
+  .cloud2 { width: 70px; height: 25px; top: 25%; left: 60%; animation-delay: 2s; }
+  .cloud2::before { width: 35px; height: 35px; top: -18px; left: 10px; }
+  .cloud2::after { width: 25px; height: 25px; top: -10px; left: 35px; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    33% { transform: translateY(-8px) translateX(5px); }
+    66% { transform: translateY(4px) translateX(-3px); }
+  }
+
+  /* Waves at bottom of hero */
+  .hero-waves {
+    position: absolute; bottom: 0; left: 0; right: 0;
+  }
+
+  .hero-emoji { font-size: 4rem; margin-bottom: 1rem; animation: bounce 2s infinite; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    color: white;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.15), 0 0 40px rgba(255,255,255,0.3);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 800;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.5rem;
+  }
+  .hero-date {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sun);
+    background: rgba(0,0,0,0.15);
+    padding: 0.4rem 1.2rem;
+    border-radius: 99px;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .crew-badges {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    justify-content: center; margin-bottom: 2.5rem;
+  }
+  .crew-badge {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: white;
+    transition: transform 0.2s;
+  }
+  .crew-badge:hover { transform: scale(1.05); }
+
+  .hero-scroll {
+    font-size: 0.8rem; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.1em;
+    animation: fadeInUp 1s 1s ease both;
+  }
+
+  /* ── AIRBNB SECTION ── */
+  .airbnb-section {
+    background: var(--sand);
+    padding: 5rem 2rem;
+    position: relative;
+  }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 3rem; }
+  .section-tag {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .section-lead {
+    font-size: 1rem;
+    color: #64748B;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .airbnb-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 60px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .airbnb-img {
+    background: linear-gradient(135deg, #06B6D4, #0EA5E9);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .airbnb-img::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 20px);
+  }
+  .airbnb-details { padding: 2.5rem; }
+  .airbnb-details h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .amenity-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .amenity-list li {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.95rem; font-weight: 700; color: #374151;
+  }
+  .amenity-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .amenity-icon.blue { background: #E0F7FA; }
+  .amenity-icon.green { background: #DCFCE7; }
+  .amenity-icon.yellow { background: #FEF9C3; }
+  .amenity-icon.pink { background: #FFE4E4; }
+
+  /* ── ACTIVITIES ── */
+  .activities-section {
+    background: linear-gradient(160deg, #0EA5E9, #06B6D4);
+    padding: 5rem 2rem;
+    position: relative;
+  }
+  .activities-section .section-title { color: white; }
+  .activities-section .section-tag { background: var(--sun); color: var(--ink); }
+  .activities-section .section-lead { color: rgba(255,255,255,0.8); }
+
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .activity-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .activity-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+  .activity-card.coral::before { background: linear-gradient(90deg, var(--coral), #FF8E8E); }
+  .activity-card.ocean::before { background: linear-gradient(90deg, var(--ocean), #38BDF8); }
+  .activity-card.palm::before { background: linear-gradient(90deg, var(--palm), #4ADE80); }
+  .activity-card.sun::before { background: linear-gradient(90deg, var(--sun), #FBBF24); }
+  .activity-card.purple::before { background: linear-gradient(90deg, var(--purple), #C084FC); }
+  .activity-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+
+  .activity-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+  .activity-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .activity-type {
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .activity-type.coral { color: var(--coral); }
+  .activity-type.ocean { color: var(--ocean-dark); }
+  .activity-type.palm { color: var(--palm-dark); }
+  .activity-type.sun { color: #D97706; }
+  .activity-type.purple { color: var(--purple); }
+  .activity-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #64748B;
+    margin-bottom: 0.75rem;
+  }
+  .activity-meta {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+  }
+  .meta-chip {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.25rem 0.7rem;
+    border-radius: 99px;
+    background: #F1F5F9;
+    color: #475569;
+  }
+  .activity-rating {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: var(--sun);
+    color: var(--ink);
+    font-size: 0.75rem;
+    font-weight: 900;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+  }
+
+  /* ── FOOD ── */
+  .food-section {
+    background: var(--sand);
+    padding: 5rem 2rem;
+  }
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .food-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: transform 0.3s;
+    border: 2px solid transparent;
+  }
+  .food-card:hover { transform: translateY(-4px); border-color: var(--coral); }
+  .food-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+  .food-name {
+    font-family: 'Pacifico', cursive;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .food-type {
+    font-size: 0.7rem; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--coral);
+    margin-bottom: 0.5rem;
+  }
+  .food-desc { font-size: 0.85rem; color: #64748B; line-height: 1.6; margin-bottom: 0.75rem; }
+  .food-stars { color: var(--sun); font-size: 0.9rem; }
+  .food-price { font-size: 0.75rem; font-weight: 700; color: var(--palm-dark); margin-left: 0.5rem; }
+
+  /* ── POOL PARTY ── */
+  .pool-section {
+    background: linear-gradient(160deg, #22C55E 0%, #16A34A 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .pool-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q25 0 50 10 Q75 20 100 10 L100 20 L0 20Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E") repeat-x;
+    background-size: 200px 40px;
+    animation: waveMove 4s linear infinite;
+  }
+  @keyframes waveMove { from { background-position: 0 0; } to { background-position: 200px 0; } }
+  .pool-section .section-title { color: white; }
+  .pool-section .section-tag { background: white; color: var(--palm-dark); }
+  .pool-section .section-lead { color: rgba(255,255,255,0.85); }
+
+  .pool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+  .pool-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .pool-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.25); }
+  .pool-card-icon { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+  .pool-card-title { font-family: 'Pacifico', cursive; font-size: 1rem; color: white; margin-bottom: 0.5rem; }
+  .pool-card-desc { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+
+  /* ── CREW ── */
+  .crew-section {
+    background: linear-gradient(160deg, #A855F7 0%, #7C3AED 100%);
+    padding: 5rem 2rem;
+  }
+  .crew-section .section-title { color: white; }
+  .crew-section .section-tag { background: var(--sun); color: var(--ink); }
+  .crew-section .section-lead { color: rgba(255,255,255,0.8); }
+
+  .crew-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.25rem;
+  }
+  .crew-card {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  .crew-card:hover { transform: scale(1.05); }
+  .crew-avatar { font-size: 2.8rem; margin-bottom: 0.5rem; display: block; }
+  .crew-name { font-family: 'Pacifico', cursive; font-size: 0.9rem; color: white; margin-bottom: 0.3rem; }
+  .crew-role { font-size: 0.72rem; font-weight: 800; color: var(--sun); }
+
+  /* ── TIPS ── */
+  .tips-section { background: var(--sand); padding: 5rem 2rem; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.25rem;
+  }
+  .tip-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex; gap: 1rem; align-items: flex-start;
+    border-left: 5px solid;
+    transition: transform 0.2s;
+  }
+  .tip-card:hover { transform: translateX(4px); }
+  .tip-card.c1 { border-color: var(--coral); }
+  .tip-card.c2 { border-color: var(--ocean); }
+  .tip-card.c3 { border-color: var(--palm); }
+  .tip-card.c4 { border-color: var(--sun); }
+  .tip-card.c5 { border-color: var(--purple); }
+  .tip-card.c6 { border-color: var(--coral); }
+  .tip-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .tip-title { font-size: 0.9rem; font-weight: 900; color: var(--ink); margin-bottom: 0.3rem; }
+  .tip-desc { font-size: 0.82rem; color: #64748B; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: linear-gradient(135deg, var(--ocean-dark), #0369A1);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    color: white;
+  }
+  footer .footer-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  }
+  footer p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 0.5rem; }
+  .footer-emojis { font-size: 1.5rem; margin: 1rem 0; letter-spacing: 0.3em; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .airbnb-card { grid-template-columns: 1fr; }
+    .airbnb-img { padding: 2rem; font-size: 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🌴 Florida Trip!</div>
+  <ul class="nav-links">
+    <li><a href="#airbnb">Our Place</a></li>
+    <li><a href="#activities">Things To Do</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#pool">Pool Time</a></li>
+    <li><a href="#crew">The Crew</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sun"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+
+  <div class="hero-emoji">🌊</div>
+  <h1 class="hero-title">Florida Family Trip!</h1>
+  <p class="hero-sub">St. Augustine, Florida 🐚</p>
+  <div class="hero-date">📅 Summer 2026 — America's Oldest City!</div>
+
+  <div class="crew-badges">
+    <span class="crew-badge">👴 Grandma</span>
+    <span class="crew-badge">👨 Dad</span>
+    <span class="crew-badge">👩 Mom</span>
+    <span class="crew-badge">🧑 Cousin</span>
+    <span class="crew-badge">👩 Aunt</span>
+    <span class="crew-badge">🧑 Other Cousin</span>
+    <span class="crew-badge">👶 Baby</span>
+    <span class="crew-badge">👩 Baby's Mom</span>
+  </div>
+
+  <p class="hero-scroll">⬇️ Scroll to see everything! ⬇️</p>
+
+  <div class="hero-waves">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 40 Q180 0 360 40 Q540 80 720 40 Q900 0 1080 40 Q1260 80 1440 40 L1440 80 L0 80Z" fill="#FFF8E7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- AIRBNB -->
+<section class="airbnb-section" id="airbnb">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">🏠 Our Home Base</div>
+      <h2 class="section-title">Our Awesome Airbnb!</h2>
+      <p class="section-lead">We've got an amazing place to stay with the whole crew — and it's got a pool AND a hot tub! 🎉</p>
+    </div>
+    <div class="airbnb-card">
+      <div class="airbnb-img">🏡</div>
+      <div class="airbnb-details">
+        <h3>Our St. Augustine Home</h3>
+        <ul class="amenity-list">
+          <li>
+            <div class="amenity-icon blue">🏊</div>
+            Private Swimming Pool — jump in any time!
+          </li>
+          <li>
+            <div class="amenity-icon pink">♨️</div>
+            Hot Tub — perfect for relaxing at night!
+          </li>
+          <li>
+            <div class="amenity-icon green">👨‍👩‍👧‍👦</div>
+            Enough room for the whole family crew!
+          </li>
+          <li>
+            <div class="amenity-icon yellow">☀️</div>
+            Florida sunshine every single day!
+          </li>
+          <li>
+            <div class="amenity-icon blue">🌴</div>
+            Close to the beach, restaurants & downtown
+          </li>
+          <li>
+            <div class="amenity-icon pink">👶</div>
+            Baby-friendly — plenty of space for everyone!
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="activities-section" id="activities">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">🗺️ Adventures Await</div>
+      <h2 class="section-title">Things To Do!</h2>
+      <p class="section-lead">St. Augustine has something for everyone — from pirates to lighthouses to beaches and more!</p>
+    </div>
+    <div class="activities-grid">
+
+      <div class="activity-card coral">
+        <div class="activity-rating">⭐ 4.7</div>
+        <span class="activity-emoji">🏰</span>
+        <div class="activity-name">Castillo de San Marcos</div>
+        <div class="activity-type coral">Historic Fort · Must Do!</div>
+        <div class="activity-desc">A giant real fort built in the 1600s right on the water! Walk the walls, see cannons, and learn cool history. Kids absolutely love it — especially climbing up the walls for amazing views!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">📍 Downtown</span>
+          <span class="meta-chip">👶 Baby Friendly</span>
+          <span class="meta-chip">9AM–5PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card ocean">
+        <div class="activity-rating">⭐ 4.7</div>
+        <span class="activity-emoji">☠️</span>
+        <div class="activity-name">Pirate & Treasure Museum</div>
+        <div class="activity-type ocean">Pirate Fun · All Ages</div>
+        <div class="activity-desc">The whole family will LOVE this! Interactive exhibits, real treasure chests, free tours from an actual dressed-up pirate, and kids can do a treasure hunt map. Super fun for everyone!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">📍 Near the Fort</span>
+          <span class="meta-chip">🏴‍☠️ Kids Love It</span>
+          <span class="meta-chip">10AM–7PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card palm">
+        <div class="activity-rating">⭐ 4.7</div>
+        <span class="activity-emoji">🔦</span>
+        <div class="activity-name">St. Augustine Lighthouse</div>
+        <div class="activity-type palm">Landmark · Scenic Views</div>
+        <div class="activity-desc">Climb 219 steps to the top for amazing views of the whole city and ocean! The grounds are gorgeous with huge old oak trees. Great for photos and totally worth the climb!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">📍 Anastasia Island</span>
+          <span class="meta-chip">🌊 Ocean Views</span>
+          <span class="meta-chip">9AM–6PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card sun">
+        <div class="activity-rating">⭐ 4.5</div>
+        <span class="activity-emoji">⛲</span>
+        <div class="activity-name">Fountain of Youth Park</div>
+        <div class="activity-type sun">History · Family Fun</div>
+        <div class="activity-desc">Drink from the legendary Fountain of Youth! The park has FREE ROAMING PEACOCKS walking around everywhere — the baby will go crazy for them! Great for grandma too, very relaxed pace.</div>
+        <div class="activity-meta">
+          <span class="meta-chip">🦚 Free Peacocks!</span>
+          <span class="meta-chip">👴 Grandma Approved</span>
+          <span class="meta-chip">9AM–5PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card coral">
+        <div class="activity-rating">⭐ 4.8</div>
+        <span class="activity-emoji">🏖️</span>
+        <div class="activity-name">Crescent Beach</div>
+        <div class="activity-type coral">Beach Day · So Pretty!</div>
+        <div class="activity-desc">Voted one of the best beaches on the East Coast! Super clean, barely crowded, beautiful soft sand. Great waves for playing in — the baby and whole crew can spend all day here easily!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">🌊 Gorgeous Beach</span>
+          <span class="meta-chip">🅿️ Free Parking</span>
+          <span class="meta-chip">Open 24hrs</span>
+        </div>
+      </div>
+
+      <div class="activity-card purple">
+        <div class="activity-rating">⭐ 4.8</div>
+        <span class="activity-emoji">🕹️</span>
+        <div class="activity-name">Anastasia Arcade Museum</div>
+        <div class="activity-type purple">Retro Arcade · So Fun!</div>
+        <div class="activity-desc">Pay ONE price and play ALL the classic arcade games all day — old school Pac-Man, pinball, you name it! Perfect for cousins and the whole family. Totally unique and so much fun!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">🎮 Free Play All Day</span>
+          <span class="meta-chip">Fri–Sun only</span>
+          <span class="meta-chip">11AM–8PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card ocean">
+        <div class="activity-rating">⭐ 4.6</div>
+        <span class="activity-emoji">🪖</span>
+        <div class="activity-name">Colonial Quarter</div>
+        <div class="activity-type ocean">Living History · Super Cool</div>
+        <div class="activity-desc">Step back in time! Live demonstrations, blacksmiths, musket fire, and a tower with amazing views of the fort. Guided tours are hilarious and informative. Great for everyone in the crew!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">📍 Downtown</span>
+          <span class="meta-chip">💥 Real Cannons!</span>
+          <span class="meta-chip">10AM–5PM</span>
+        </div>
+      </div>
+
+      <div class="activity-card palm">
+        <div class="activity-rating">⭐ 4.4</div>
+        <span class="activity-emoji">🛝</span>
+        <div class="activity-name">Project Swing Park</div>
+        <div class="activity-type palm">Outdoor Play · Free!</div>
+        <div class="activity-desc">A huge awesome wooden playground right near the fort — totally FREE! Great for running around, burning energy, and relaxing on the benches while the little ones play. Perfect afternoon stop!</div>
+        <div class="activity-meta">
+          <span class="meta-chip">🆓 Free!</span>
+          <span class="meta-chip">👶 Baby Friendly</span>
+          <span class="meta-chip">7:30AM–7PM</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div style="margin-top:0; overflow:hidden; line-height:0;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 30 Q360 60 720 30 Q1080 0 1440 30 L1440 60 L0 60Z" fill="#FFF8E7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="food-section" id="food">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">🍽️ Eat Up!</div>
+      <h2 class="section-title">Where To Eat!</h2>
+      <p class="section-lead">St. Augustine has amazing food — fresh seafood, fun vibes, and places the whole crew will love!</p>
+    </div>
+    <div class="food-grid">
+      <div class="food-card">
+        <span class="food-emoji">🦞</span>
+        <div class="food-name">Harry's Seafood Bar & Grille</div>
+        <div class="food-type">Seafood · Cajun · Waterfront</div>
+        <div class="food-desc">Right on the water downtown with live music! Amazing Cajun food, great for the whole family. The shrimp creole and crab soup are legendary. Everyone always loves this place!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐⭐</span>
+          <span class="food-price">$$ · Great Value</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <span class="food-emoji">🐠</span>
+        <div class="food-name">Beachcomber</div>
+        <div class="food-type">Seafood · Beach Bar · Casual</div>
+        <div class="food-desc">Right on the beach with your toes in the sand! Super chill vibes, great fish tacos and wings. Perfect for a laid-back lunch after a morning at the beach. The kids will love the outdoor tables!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐⭐</span>
+          <span class="food-price">$$ · Beach Vibes</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <span class="food-emoji">🌮</span>
+        <div class="food-name">Treylor Park</div>
+        <div class="food-type">Funky American · Unique Menu</div>
+        <div class="food-desc">Super unique and fun menu — steak egg rolls, amazing fish & chips, Miyagi tacos. The staff is super friendly and the whole place has a great energy. Everyone in the crew will find something they love!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐⭐</span>
+          <span class="food-price">$$ · Super Fun</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <span class="food-emoji">🍳</span>
+        <div class="food-name">The Blue Hen Café</div>
+        <div class="food-type">Breakfast · Southern · Cozy</div>
+        <div class="food-desc">The BEST breakfast spot in St. Augustine! Fresh fluffy biscuits, incredible chicken & biscuits, and the friendliest staff. Perfect for a big family breakfast to start the day. Get there early — it gets busy!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐⭐</span>
+          <span class="food-price">$ · Super Affordable</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <span class="food-emoji">🌊</span>
+        <div class="food-name">Aunt Kates</div>
+        <div class="food-type">Seafood · Riverside · Classic</div>
+        <div class="food-desc">Hidden gem right on the river with gorgeous views! Huge portions of fresh seafood, amazing crab cakes, and beautiful scenery. Great for a special family dinner. Grandma will absolutely love the atmosphere!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐</span>
+          <span class="food-price">$$ · Worth It!</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <span class="food-emoji">🍦</span>
+        <div class="food-name">Ice Cream on St. George St!</div>
+        <div class="food-type">Dessert · Strolling · Fun</div>
+        <div class="food-desc">St. George Street is the main historic street — walk around, shop, and grab ice cream! Tons of little sweet shops, perfect for the baby and everyone else after exploring downtown St. Augustine!</div>
+        <div>
+          <span class="food-stars">⭐⭐⭐⭐⭐</span>
+          <span class="food-price">$ · Can't Miss It!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POOL PARTY -->
+<section class="pool-section" id="pool">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">🏊 Splash Zone</div>
+      <h2 class="section-title">Pool & Hot Tub Fun!</h2>
+      <p class="section-lead">We've got our OWN private pool and hot tub at the Airbnb — so every day can be a pool party! 🎉</p>
+    </div>
+    <div class="pool-grid">
+      <div class="pool-card">
+        <span class="pool-card-icon">🏊</span>
+        <div class="pool-card-title">Pool Parties!</div>
+        <div class="pool-card-desc">Swim all day long in our private pool — no strangers, no sharing, just the whole family having a blast!</div>
+      </div>
+      <div class="pool-card">
+        <span class="pool-card-icon">♨️</span>
+        <div class="pool-card-title">Hot Tub Nights</div>
+        <div class="pool-card-desc">After a long day of adventures, soak in the hot tub under the Florida stars. So relaxing for the adults!</div>
+      </div>
+      <div class="pool-card">
+        <span class="pool-card-icon">👶</span>
+        <div class="pool-card-title">Baby's First Swim!</div>
+        <div class="pool-card-desc">The perfect safe spot for the baby's first pool experience with the whole family watching and cheering!</div>
+      </div>
+      <div class="pool-card">
+        <span class="pool-card-icon">🌞</span>
+        <div class="pool-card-title">Sunbathing</div>
+        <div class="pool-card-desc">Florida sunshine, pool chairs, and a cool drink — the perfect afternoon for grandma and the whole crew!</div>
+      </div>
+      <div class="pool-card">
+        <span class="pool-card-icon">🎮</span>
+        <div class="pool-card-title">Pool Games!</div>
+        <div class="pool-card-desc">Marco Polo, who can make the biggest splash, diving for stuff — cousins battling it out in the pool all day!</div>
+      </div>
+      <div class="pool-card">
+        <span class="pool-card-icon">🍕</span>
+        <div class="pool-card-title">Poolside Cookouts</div>
+        <div class="pool-card-desc">Fire up the grill and eat poolside as a family — one of the best parts about having a private Airbnb!</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:0; overflow:hidden; line-height:0;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 20 Q360 60 720 20 Q1080 -20 1440 20 L1440 60 L0 60Z" fill="#A855F7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="crew-section" id="crew">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">👨‍👩‍👧‍👦 The Squad</div>
+      <h2 class="section-title">Our Family Crew!</h2>
+      <p class="section-lead">The more the merrier — here's everyone coming on this epic trip! 🎉</p>
+    </div>
+    <div class="crew-grid">
+      <div class="crew-card">
+        <span class="crew-avatar">👴</span>
+        <div class="crew-name">Grandma</div>
+        <div class="crew-role">The Legend 👑</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">👨</span>
+        <div class="crew-name">Dad</div>
+        <div class="crew-role">Trip Planner 🗺️</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">👩</span>
+        <div class="crew-name">Mom</div>
+        <div class="crew-role">Heart of the Trip 💛</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">🧑</span>
+        <div class="crew-name">Cousin</div>
+        <div class="crew-role">The Fun One 🎮</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">👩</span>
+        <div class="crew-name">Aunt</div>
+        <div class="crew-role">Best Aunt Ever 🌟</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">🧑</span>
+        <div class="crew-name">Other Cousin</div>
+        <div class="crew-role">New Dad Life 🍼</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">👶</span>
+        <div class="crew-name">The Baby</div>
+        <div class="crew-role">VIP Guest 🌟</div>
+      </div>
+      <div class="crew-card">
+        <span class="crew-avatar">👩</span>
+        <div class="crew-name">Baby's Mom</div>
+        <div class="crew-role">Superhero Mom 💪</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2rem; overflow:hidden; line-height:0;">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 30 Q360 0 720 30 Q1080 60 1440 30 L1440 60 L0 60Z" fill="#FFF8E7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips-section" id="tips">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">💡 Pro Tips</div>
+      <h2 class="section-title">Good To Know!</h2>
+      <p class="section-lead">A few handy tips to make the trip even smoother for the whole crew!</p>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card c1">
+        <div class="tip-icon">☀️</div>
+        <div>
+          <div class="tip-title">Pack Sunscreen!</div>
+          <div class="tip-desc">Florida sun is NO JOKE — bring lots of sunscreen especially for the baby and grandma. Reapply every 2 hours at the beach!</div>
+        </div>
+      </div>
+      <div class="tip-card c2">
+        <div class="tip-icon">🌊</div>
+        <div>
+          <div class="tip-title">Beach Gear</div>
+          <div class="tip-desc">Bring a beach umbrella, towels, and sand toys for the baby. Crescent Beach is the best — not too crowded and super clean!</div>
+        </div>
+      </div>
+      <div class="tip-card c3">
+        <div class="tip-icon">🚗</div>
+        <div>
+          <div class="tip-title">Parking Tip</div>
+          <div class="tip-desc">Downtown parking can get busy! The parking garage near Castillo de San Marcos is your best bet. About $5 after 5PM!</div>
+        </div>
+      </div>
+      <div class="tip-card c4">
+        <div class="tip-icon">🍽️</div>
+        <div>
+          <div class="tip-title">Make Reservations!</div>
+          <div class="tip-desc">For big restaurants like Harry's and Aunt Kates, call ahead especially with a big crew of 8+. Will save you a long wait!</div>
+        </div>
+      </div>
+      <div class="tip-card c5">
+        <div class="tip-icon">👶</div>
+        <div>
+          <div class="tip-title">Baby Essentials</div>
+          <div class="tip-desc">808 Bounce and Project Swing Park are amazing for the little one. The Fountain of Youth Park is super stroller-friendly too!</div>
+        </div>
+      </div>
+      <div class="tip-card c6">
+        <div class="tip-icon">📸</div>
+        <div>
+          <div class="tip-title">Take Lots of Photos!</div>
+          <div class="tip-desc">The lighthouse, the fort, the peacocks, and the beach sunset — this trip is going to make amazing memories. Document everything!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌴 Our Florida Trip! 🌴</div>
+  <div class="footer-emojis">☀️ 🏖️ 🦞 🏰 ☠️ 🏊 👶 🦚</div>
+  <p>St. Augustine, Florida · Summer 2026</p>
+  <p style="margin-top:0.5rem;">Can't wait to make amazing memories together as a family! 💛</p>
+</footer>
+
+</body>
+</html>
